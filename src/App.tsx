@@ -1,24 +1,21 @@
 import { NativeBaseProvider } from "native-base";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native";
+import { Provider } from "react-redux";
 
 import { theme } from "./assets/theme";
+import { Navigation } from "./navigation/Navigation";
+import { store } from "./redux/store";
 
 function App() {
   return (
-    <NativeBaseProvider theme={theme}>
-      <View style={styles.sectionContainer}>
-        <Text>Hello</Text>
-      </View>
-    </NativeBaseProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <NativeBaseProvider theme={theme}>
+          <Navigation />
+        </NativeBaseProvider>
+      </Provider>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default App;
