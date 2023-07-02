@@ -1,10 +1,15 @@
+import { NativeBaseProvider } from "native-base";
 import { StyleSheet, Text, View } from "react-native";
+
+import { theme } from "./assets/theme";
 
 function App() {
   return (
-    <View style={styles.sectionContainer}>
-      <Text>Hello</Text>
-    </View>
+    <NativeBaseProvider theme={theme}>
+      <View style={styles.sectionContainer}>
+        <Text>Hello</Text>
+      </View>
+    </NativeBaseProvider>
   );
 }
 
