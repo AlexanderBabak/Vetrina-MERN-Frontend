@@ -15,7 +15,7 @@ type Props = {
   onBlur: (e: any) => void;
 };
 
-export const InputStyled: React.FC<Props> = ({
+const InputStyled: React.FC<Props> = ({
   placeholder,
   isInvalid,
   errorMessage,
@@ -48,3 +48,5 @@ export const InputStyled: React.FC<Props> = ({
     </FormControl>
   );
 };
+
+export default InputStyled;

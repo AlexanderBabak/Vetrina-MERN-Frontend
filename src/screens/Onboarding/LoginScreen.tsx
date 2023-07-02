@@ -4,16 +4,18 @@ import { Center, Divider, HStack, ScrollView, Text, VStack } from "native-base";
 import React from "react";
 import * as yup from "yup";
 
-import { AuthHeader } from "../components/AuthHeader";
-import { AuthNavigation } from "../components/AuthNavigation";
-import { ButtonStyled } from "../components/UI/ButtonStyled";
-import { ButtonStyledOutlined } from "../components/UI/ButtonStyledOutlined";
-import { ButtonSupport } from "../components/UI/ButtonSupport";
-import { InputStyled } from "../components/UI/InputStyled";
-import { RootParamList } from "../interfaces/navigationInterfaces";
-import { useAppDispatch, useAppSelector } from "../redux/reduxType";
-import { authSelector } from "../redux/slices/authSlice";
-import { loginThunk } from "../redux/slices/authThunk";
+import { AuthHeader } from "../../components/AuthHeader";
+import { AuthNavigation } from "../../components/AuthNavigation";
+import {
+  ButtonStyled,
+  ButtonStyledOutlined,
+  ButtonSupport,
+  InputStyled,
+} from "../../components/UI";
+import { RootParamList } from "../../interfaces/navigationInterfaces";
+import { useAppDispatch, useAppSelector } from "../../redux/reduxType";
+import { authSelector } from "../../redux/slices/authSlice";
+import { loginThunk } from "../../redux/slices/authThunk";
 
 const loginSchema = yup.object({
   email: yup.string().required().email(),

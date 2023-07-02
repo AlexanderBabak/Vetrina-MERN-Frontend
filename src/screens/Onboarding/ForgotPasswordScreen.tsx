@@ -4,15 +4,13 @@ import { Center, Text, VStack } from "native-base";
 import React from "react";
 import * as yup from "yup";
 
-import { AuthHeader } from "../components/AuthHeader";
-import { AuthNavigation } from "../components/AuthNavigation";
-import { ButtonStyled } from "../components/UI/ButtonStyled";
-import { ButtonSupport } from "../components/UI/ButtonSupport";
-import { InputStyled } from "../components/UI/InputStyled";
-import { RootParamList } from "../interfaces/navigationInterfaces";
-import { useAppDispatch, useAppSelector } from "../redux/reduxType";
-import { authSelector } from "../redux/slices/authSlice";
-import { forgotPasswordThunk } from "../redux/slices/authThunk";
+import { AuthHeader } from "../../components/AuthHeader";
+import { AuthNavigation } from "../../components/AuthNavigation";
+import { ButtonStyled, ButtonSupport, InputStyled } from "../../components/UI";
+import { RootParamList } from "../../interfaces/navigationInterfaces";
+import { useAppDispatch, useAppSelector } from "../../redux/reduxType";
+import { authSelector } from "../../redux/slices/authSlice";
+import { forgotPasswordThunk } from "../../redux/slices/authThunk";
 
 const forgotPasswordSchema = yup.object({
   email: yup.string().required().email(),

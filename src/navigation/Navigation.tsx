@@ -7,11 +7,11 @@ import React, { useEffect } from "react";
 import { RootStackParamList } from "../interfaces/navigationInterfaces";
 import { useAppDispatch, useAppSelector } from "../redux/reduxType";
 import { authSelector, signIn } from "../redux/slices/authSlice";
-import { ForgotPasswordScreen } from "../screens/ForgotPasswordScreen";
-import { LoginScreen } from "../screens/LoginScreen";
 import { MainScreen } from "../screens/MainScreen";
-import { RegisterScreen } from "../screens/RegisterScreen";
-import { SupportScreen } from "../screens/SupportScreen";
+import { ForgotPasswordScreen } from "../screens/Onboarding/ForgotPasswordScreen";
+import { LoginScreen } from "../screens/Onboarding/LoginScreen";
+import { RegisterScreen } from "../screens/Onboarding/RegisterScreen";
+import { SupportScreen } from "../screens/Onboarding/SupportScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

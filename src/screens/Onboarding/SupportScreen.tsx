@@ -1,7 +1,8 @@
-import { Button, Center, Heading, Text } from 'native-base';
-import React from 'react';
-import { RootParamList } from '../interfaces/navigationInterfaces';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Button, Center, Heading, Text } from "native-base";
+import React from "react";
+
+import { RootParamList } from "../../interfaces/navigationInterfaces";
 
 type Props = {
   navigation: NativeStackNavigationProp<RootParamList>;

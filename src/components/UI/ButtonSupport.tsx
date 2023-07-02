@@ -1,28 +1,29 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { Center, Pressable, Text, View } from 'native-base';
-import HeadphonesIcon from '../../assets/icons/HeadphonesIcon';
-import { RootParamList } from '../../interfaces/navigationInterfaces';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Center, Pressable, Text, View } from "native-base";
+import React from "react";
 
-export const ButtonSupport = () => {
+import HeadphonesIcon from "../../assets/icons/HeadphonesIcon";
+import { RootParamList } from "../../interfaces/navigationInterfaces";
+
+const ButtonSupport = () => {
   const navigation: NativeStackNavigationProp<RootParamList> = useNavigation();
   return (
-    <View maxWidth={'128px'}>
+    <View maxWidth={"128px"}>
       <Pressable
         onPress={() => {
-          navigation.navigate('SupportScreen');
+          navigation.navigate("SupportScreen");
         }}
       >
         {({ isPressed }) => (
           <Center
-            flexDirection={'row'}
-            paddingY={'15px'}
-            paddingX={'24px'}
+            flexDirection={"row"}
+            paddingY={"15px"}
+            paddingX={"24px"}
             borderWidth={1}
             borderColor="primary.green"
-            backgroundColor={isPressed ? 'primary.green' : 'transparent'}
-            borderRadius={'30px'}
+            backgroundColor={isPressed ? "primary.green" : "transparent"}
+            borderRadius={"30px"}
           >
             <HeadphonesIcon />
             <Text
@@ -42,3 +43,5 @@ export const ButtonSupport = () => {
     </View>
   );
 };
+
+export default ButtonSupport;

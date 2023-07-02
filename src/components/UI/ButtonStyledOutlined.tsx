@@ -1,32 +1,29 @@
-import { Center, Pressable, Text, View } from 'native-base';
-import React from 'react';
-import FacebookIcon from '../../assets/icons/FacebookIcon';
-import GoogleIcon from '../../assets/icons/GoogleIcon';
+import { Center, Pressable, Text, View } from "native-base";
+import React from "react";
+
+import FacebookIcon from "../../assets/icons/FacebookIcon";
+import GoogleIcon from "../../assets/icons/GoogleIcon";
 
 type Props = {
   children: string;
   onPress: () => void;
-  icon: 'facebook' | 'google';
+  icon: "facebook" | "google";
 };
 
-export const ButtonStyledOutlined: React.FC<Props> = ({
-  children,
-  onPress,
-  icon,
-}) => {
+const ButtonStyledOutlined: React.FC<Props> = ({ children, onPress, icon }) => {
   return (
     <View>
       <Pressable onPress={onPress}>
         {({ isPressed }) => (
           <Center
-            flexDirection={'row'}
-            padding={'12px'}
+            flexDirection={"row"}
+            padding={"12px"}
             borderWidth={1}
             borderColor="primary.blue.main"
-            backgroundColor={isPressed ? 'primary.blue.700' : 'transparent'}
+            backgroundColor={isPressed ? "primary.blue.700" : "transparent"}
             borderRadius={5}
           >
-            {icon === 'facebook' ? <FacebookIcon /> : <GoogleIcon />}
+            {icon === "facebook" ? <FacebookIcon /> : <GoogleIcon />}
             <Text
               marginLeft="22px"
               textAlign="center"
@@ -44,3 +41,5 @@ export const ButtonStyledOutlined: React.FC<Props> = ({
     </View>
   );
 };
+
+export default ButtonStyledOutlined;

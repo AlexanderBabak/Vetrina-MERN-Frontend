@@ -1,5 +1,5 @@
-import { Pressable, Text, View } from 'native-base';
-import React from 'react';
+import { Pressable, Text, View } from "native-base";
+import React from "react";
 
 type Props = {
   children: string;
@@ -8,7 +8,7 @@ type Props = {
   maxWidth?: string;
 };
 
-export const ButtonStyled: React.FC<Props> = ({
+const ButtonStyled: React.FC<Props> = ({
   children,
   onPress,
   maxWidth,
@@ -19,10 +19,10 @@ export const ButtonStyled: React.FC<Props> = ({
       <Pressable onPress={onPress}>
         {({ isPressed }) => (
           <View
-            padding={'15px'}
+            padding={"15px"}
             shadow={1}
             backgroundColor={
-              isPressed ? 'primary.blue.700' : 'primary.blue.main'
+              isPressed ? "primary.blue.700" : "primary.blue.main"
             }
             borderRadius={5}
           >
@@ -42,3 +42,5 @@ export const ButtonStyled: React.FC<Props> = ({
     </View>
   );
 };
+
+export default ButtonStyled;
