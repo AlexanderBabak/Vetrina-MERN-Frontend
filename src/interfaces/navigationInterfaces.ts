@@ -1,8 +1,13 @@
-export type RootStackParamList = {
+export type OnboardingStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   ForgotPasswordScreen: undefined;
+  NewPasswordScreen: { email: string };
+  OTPScreen: { email: string };
   SupportScreen: undefined;
+};
+
+export type MainStackParamList = {
   MainScreen: undefined;
   DashboardScreen: undefined;
   PaymentScreen: undefined;
@@ -11,4 +16,4 @@ export type RootStackParamList = {
   LogoutScreen: undefined;
 };
 
-export type RootParamList = RootStackParamList;
+export type RootParamList = OnboardingStackParamList | MainStackParamList;

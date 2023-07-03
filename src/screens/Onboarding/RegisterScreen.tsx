@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import axios from "axios";
 import { Formik } from "formik";
 import { Center, Divider, HStack, ScrollView, Text, VStack } from "native-base";
 import React from "react";
@@ -12,10 +13,7 @@ import {
   ButtonSupport,
   InputStyled,
 } from "../../components/UI";
-import { RootParamList } from "../../interfaces/navigationInterfaces";
-import { useAppDispatch, useAppSelector } from "../../redux/reduxType";
-import { authSelector } from "../../redux/slices/authSlice";
-import { registerThunk } from "../../redux/slices/authThunk";
+import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
 
 const registerSchema = yup.object({
   name: yup.string().required().min(2),
@@ -28,21 +26,26 @@ const registerSchema = yup.object({
 });
 
 type Props = {
-  navigation: NativeStackNavigationProp<RootParamList>;
+  navigation: NativeStackNavigationProp<OnboardingStackParamList>;
 };
 
 export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
-  const { loadingAuth } = useAppSelector(authSelector);
-  const dispatch = useAppDispatch();
+  // const { loadingAuth } = useAppSelector(authSelector);
+  // const dispatch = useAppDispatch();
 
-  if (loadingAuth) {
-    return (
-      <Center flex={1}>
-        <Text>Creating user...</Text>
-      </Center>
-    );
-  }
-
+  const handleRegister = async (values: any, actions: any) => {
+    try {
+      await axios.post("http://localhost:3000/api/users/register", {
+        email: values.email,
+        name: values.name,
+        password: values.password,
+      });
+      actions.resetForm();
+      navigation.navigate("OTPScreen", { email: values.email });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <VStack flex={1} backgroundColor="#fff">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -54,10 +57,8 @@ export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
           <Formik
             initialValues={{ name: "", email: "", password: "" }}
             validationSchema={registerSchema}
-            onSubmit={(values, actions) => {
-              dispatch(registerThunk(values));
-              actions.resetForm();
-            }}
+            onSubmit={handleRegister}
+            validateOnBlur={false}
           >
             {props => (
               <VStack space={4}>

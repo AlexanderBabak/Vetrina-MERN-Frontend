@@ -4,10 +4,11 @@ import { Center, Pressable, Text, View } from "native-base";
 import React from "react";
 
 import HeadphonesIcon from "../../assets/icons/HeadphonesIcon";
-import { RootParamList } from "../../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
 
 const ButtonSupport = () => {
-  const navigation: NativeStackNavigationProp<RootParamList> = useNavigation();
+  const navigation: NativeStackNavigationProp<OnboardingStackParamList> =
+    useNavigation();
   return (
     <View maxWidth={"128px"}>
       <Pressable

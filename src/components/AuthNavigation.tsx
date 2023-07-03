@@ -1,5 +1,5 @@
-import { Center, Link, Text } from 'native-base';
-import React from 'react';
+import { Center, Link, Text } from "native-base";
+import React from "react";
 
 type Props = {
   text: string;
@@ -16,7 +16,7 @@ export const AuthNavigation: React.FC<Props> = ({
     <Center>
       <Link
         isUnderlined={false}
-        _text={{ color: 'primary.blue.main', fontSize: 18, lineHeight: 28 }}
+        _text={{ color: "primary.blue.main", fontSize: 18, lineHeight: 28 }}
         onPress={onPress}
       >
         <Text marginRight={1} fontSize={18} color="neutral.black.default">

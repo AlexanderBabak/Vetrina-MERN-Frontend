@@ -4,43 +4,59 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "native-base";
 import React, { useEffect } from "react";
 
-import { RootStackParamList } from "../interfaces/navigationInterfaces";
+import {
+  MainStackParamList,
+  OnboardingStackParamList,
+} from "../interfaces/navigationInterfaces";
 import { useAppDispatch, useAppSelector } from "../redux/reduxType";
 import { authSelector, signIn } from "../redux/slices/authSlice";
 import { MainScreen } from "../screens/MainScreen";
 import { ForgotPasswordScreen } from "../screens/Onboarding/ForgotPasswordScreen";
 import { LoginScreen } from "../screens/Onboarding/LoginScreen";
+import { NewPasswordScreen } from "../screens/Onboarding/NewPasswordScreen";
+import { OTPScreen } from "../screens/Onboarding/OTPScreen";
 import { RegisterScreen } from "../screens/Onboarding/RegisterScreen";
 import { SupportScreen } from "../screens/Onboarding/SupportScreen";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
+
+const MainStack = createNativeStackNavigator<MainStackParamList>();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator
+    <OnboardingStack.Navigator
       initialRouteName="LoginScreen"
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-      <Stack.Screen
+      <OnboardingStack.Screen name="LoginScreen" component={LoginScreen} />
+      <OnboardingStack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+      />
+      <OnboardingStack.Screen
         name="ForgotPasswordScreen"
         component={ForgotPasswordScreen}
       />
-      <Stack.Screen name="SupportScreen" component={SupportScreen} />
-    </Stack.Navigator>
+      <OnboardingStack.Screen
+        name="NewPasswordScreen"
+        component={NewPasswordScreen}
+      />
+
+      <OnboardingStack.Screen name="OTPScreen" component={OTPScreen} />
+      <OnboardingStack.Screen name="SupportScreen" component={SupportScreen} />
+    </OnboardingStack.Navigator>
   );
 };
 
 const AuthenticatedStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <MainStack.Navigator>
+      <MainStack.Screen
         name="MainScreen"
         component={MainScreen}
         options={{ headerShown: false }}
       />
-    </Stack.Navigator>
+    </MainStack.Navigator>
   );
 };
 
@@ -50,10 +66,10 @@ export const Navigation = () => {
 
   useEffect(() => {
     const fetchToken = async () => {
-      const storedUser = await AsyncStorage.getItem("user");
+      const storedToken = await AsyncStorage.getItem("token");
 
-      if (storedUser) {
-        dispatch(signIn(JSON.parse(storedUser)));
+      if (storedToken) {
+        // dispatch(signIn({ token: storedToken }));
       }
     };
 

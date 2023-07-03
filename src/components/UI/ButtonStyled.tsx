@@ -6,6 +6,7 @@ type Props = {
   onPress: () => void;
   fontSize: number;
   maxWidth?: string;
+  isDisabled?: boolean;
 };
 
 const ButtonStyled: React.FC<Props> = ({
@@ -13,16 +14,21 @@ const ButtonStyled: React.FC<Props> = ({
   onPress,
   maxWidth,
   fontSize,
+  isDisabled = false,
 }) => {
   return (
     <View maxWidth={maxWidth}>
-      <Pressable onPress={onPress}>
+      <Pressable onPress={onPress} disabled={isDisabled}>
         {({ isPressed }) => (
           <View
             padding={"15px"}
             shadow={1}
             backgroundColor={
-              isPressed ? "primary.blue.700" : "primary.blue.main"
+              isDisabled
+                ? "gray.400"
+                : isPressed
+                ? "primary.blue.700"
+                : "primary.blue.main"
             }
             borderRadius={5}
           >

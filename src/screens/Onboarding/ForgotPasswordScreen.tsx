@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import axios from "axios";
 import { Formik } from "formik";
 import { Center, Text, VStack } from "native-base";
 import React from "react";
@@ -7,30 +8,29 @@ import * as yup from "yup";
 import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
 import { ButtonStyled, ButtonSupport, InputStyled } from "../../components/UI";
-import { RootParamList } from "../../interfaces/navigationInterfaces";
-import { useAppDispatch, useAppSelector } from "../../redux/reduxType";
-import { authSelector } from "../../redux/slices/authSlice";
-import { forgotPasswordThunk } from "../../redux/slices/authThunk";
+import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
 
 const forgotPasswordSchema = yup.object({
   email: yup.string().required().email(),
 });
 
 type Props = {
-  navigation: NativeStackNavigationProp<RootParamList>;
+  navigation: NativeStackNavigationProp<OnboardingStackParamList>;
 };
 
 export const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
-  const { loadingAuth } = useAppSelector(authSelector);
-  const dispatch = useAppDispatch();
+  const handleForgotPassword = async (values: any, actions: any) => {
+    try {
+      await axios.post("http://localhost:3000/api/users/forgot-password", {
+        email: values.email,
+      });
+      actions.resetForm();
+      navigation.navigate("OTPScreen", { email: values.email });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  if (loadingAuth) {
-    return (
-      <Center flex={1}>
-        <Text>Wait server response...</Text>
-      </Center>
-    );
-  }
   return (
     <VStack flex={1} backgroundColor="#fff">
       <AuthHeader
@@ -41,11 +41,8 @@ export const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
         <Formik
           initialValues={{ email: "" }}
           validationSchema={forgotPasswordSchema}
-          onSubmit={(values, actions) => {
-            dispatch(forgotPasswordThunk(values));
-            navigation.navigate("LoginScreen");
-            actions.resetForm();
-          }}
+          onSubmit={handleForgotPassword}
+          validateOnBlur={false}
         >
           {props => (
             <VStack space={4}>

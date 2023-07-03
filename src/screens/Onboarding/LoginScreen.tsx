@@ -1,4 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import axios from "axios";
 import { Formik } from "formik";
 import { Center, Divider, HStack, ScrollView, Text, VStack } from "native-base";
 import React from "react";
@@ -12,10 +14,9 @@ import {
   ButtonSupport,
   InputStyled,
 } from "../../components/UI";
-import { RootParamList } from "../../interfaces/navigationInterfaces";
-import { useAppDispatch, useAppSelector } from "../../redux/reduxType";
-import { authSelector } from "../../redux/slices/authSlice";
-import { loginThunk } from "../../redux/slices/authThunk";
+import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
+import { useAppDispatch } from "../../redux/reduxType";
+import { signIn } from "../../redux/slices/authSlice";
 
 const loginSchema = yup.object({
   email: yup.string().required().email(),
@@ -27,20 +28,30 @@ const loginSchema = yup.object({
 });
 
 type Props = {
-  navigation: NativeStackNavigationProp<RootParamList>;
+  navigation: NativeStackNavigationProp<OnboardingStackParamList>;
 };
 
 export const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  const { loadingAuth } = useAppSelector(authSelector);
   const dispatch = useAppDispatch();
 
-  if (loadingAuth) {
-    return (
-      <Center flex={1}>
-        <Text>Login user...</Text>
-      </Center>
-    );
-  }
+  const handleLogin = async (values: any, actions: any) => {
+    try {
+      const loginResponse = await axios.post(
+        "http://localhost:3000/api/users/login",
+        {
+          email: values.email,
+          password: values.password,
+        },
+      );
+
+      const { token } = loginResponse.data;
+      await AsyncStorage.setItem("token", JSON.stringify(token));
+      dispatch(signIn({ token }));
+      actions.resetForm();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <VStack flex={1} backgroundColor="#fff">
@@ -53,10 +64,8 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={loginSchema}
-            onSubmit={(values, actions) => {
-              dispatch(loginThunk(values));
-              actions.resetForm();
-            }}
+            onSubmit={handleLogin}
+            validateOnBlur={false}
           >
             {props => (
               <VStack space={4}>
