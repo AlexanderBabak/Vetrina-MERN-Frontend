@@ -30,9 +30,6 @@ type Props = {
 };
 
 export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
-  // const { loadingAuth } = useAppSelector(authSelector);
-  // const dispatch = useAppDispatch();
-
   const handleRegister = async (values: any, actions: any) => {
     try {
       await axios.post("http://localhost:3000/api/users/register", {
@@ -51,7 +48,7 @@ export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <AuthHeader
           title="Create your e-commerce"
-          subtitle="Prova Vetrina Live gratuitamente per 7 giorni e apri il tuo negozio online in pochi minuti. Nessuna carta di credito richiesta."
+          subtitle="Prova Vetrina Live gratuitamente per 7 giorni e apri il tuo negozio online in pochi minuti."
         />
         <VStack paddingX="15px" paddingY="24px" space={6}>
           <Formik
@@ -96,7 +93,7 @@ export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
                   autoCorrect={false}
                   secureTextEntry={true}
                 />
-                <ButtonStyled onPress={props.handleSubmit} fontSize={14}>
+                <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
                   Create your shop
                 </ButtonStyled>
               </VStack>

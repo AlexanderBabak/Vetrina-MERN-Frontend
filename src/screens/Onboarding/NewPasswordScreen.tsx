@@ -46,7 +46,7 @@ export const NewPasswordScreen: React.FC<Props> = ({ navigation, route }) => {
         newPassword: values.newPassword,
       });
       actions.resetForm();
-      navigation.navigate("LoginScreen");
+      navigation.replace("LoginScreen");
     } catch (err) {
       console.log(err);
     }
@@ -94,7 +94,7 @@ export const NewPasswordScreen: React.FC<Props> = ({ navigation, route }) => {
                 secureTextEntry={true}
               />
 
-              <ButtonStyled onPress={props.handleSubmit} fontSize={14}>
+              <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
                 Create new password
               </ButtonStyled>
             </VStack>

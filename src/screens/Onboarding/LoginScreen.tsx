@@ -93,7 +93,7 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
                   autoCorrect={false}
                   secureTextEntry={true}
                 />
-                <ButtonStyled onPress={props.handleSubmit} fontSize={14}>
+                <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
                   Login
                 </ButtonStyled>
               </VStack>
