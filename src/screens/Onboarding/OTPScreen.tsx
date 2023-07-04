@@ -1,55 +1,31 @@
-import { useNavigationState } from "@react-navigation/native";
+import React from "react";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import OTPInputView from "@twotalltotems/react-native-otp-input/dist";
-import axios from "axios";
 import { HStack, Text, VStack } from "native-base";
-import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
 
 import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
 import { ButtonStyled } from "../../components/UI";
-import { useTimer } from "../../hooks/useTimer";
+import { useOTP } from "../../hooks/useOTP";
 import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "OTPScreen">;
 
 export const OTPScreen: React.FC<Props> = ({ navigation, route }) => {
-  const [confirmCode, setConfirmCode] = useState("");
-  const { seconds, setSeconds, formatTime } = useTimer();
-
   const { email } = route.params;
   const subtitle = `Enter it below to verify ${email}`;
 
-  const navigationState = useNavigationState(state => state);
-  const prevScreenName =
-    navigationState.routes[navigationState.routes.length - 2].name;
-
-  const handleSubmit = async () => {
-    if (!confirmCode) {
-      return;
-    }
-
-    try {
-      await axios.get(`http://localhost:3000/api/users/verify/${confirmCode}`);
-      if (prevScreenName === "ForgotPasswordScreen") {
-        navigation.replace("NewPasswordScreen", { email });
-      } else {
-        navigation.replace("LoginScreen");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleResend = async () => {
-    try {
-      await axios.post("http://localhost:3000/api/users/verify", { email });
-      setSeconds(120);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const {
+    isLoading,
+    handleSubmit,
+    handleResend,
+    confirmCode,
+    setConfirmCode,
+    seconds,
+    formatTime,
+  } = useOTP(email);
 
   return (
     <VStack flex={1} backgroundColor="#fff">
@@ -72,7 +48,8 @@ export const OTPScreen: React.FC<Props> = ({ navigation, route }) => {
         <ButtonStyled
           onPress={handleSubmit}
           fontSize={18}
-          isDisabled={!confirmCode || seconds === 0}
+          isDisabled={!confirmCode || seconds === 0 || isLoading}
+          isLoading={isLoading}
         >
           Verify
         </ButtonStyled>

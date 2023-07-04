@@ -1,36 +1,22 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import axios from "axios";
-import { Formik } from "formik";
-import { Center, Text, VStack } from "native-base";
 import React from "react";
-import * as yup from "yup";
+
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Formik } from "formik";
+import { Center, VStack } from "native-base";
 
 import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
 import { ButtonStyled, ButtonSupport, InputStyled } from "../../components/UI";
+import { forgotPasswordSchema } from "../../helpers/yupSchemas";
+import { useForgotPassword } from "../../hooks/useFogotPassword";
 import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
-
-const forgotPasswordSchema = yup.object({
-  email: yup.string().required().email(),
-});
 
 type Props = {
   navigation: NativeStackNavigationProp<OnboardingStackParamList>;
 };
 
 export const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
-  const handleForgotPassword = async (values: any, actions: any) => {
-    try {
-      await axios.post("http://localhost:3000/api/users/forgot-password", {
-        email: values.email,
-      });
-      actions.resetForm();
-      navigation.navigate("OTPScreen", { email: values.email });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  const { isLoading, handleForgotPassword } = useForgotPassword();
   return (
     <VStack flex={1} backgroundColor="#fff">
       <AuthHeader
@@ -57,7 +43,12 @@ export const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
               />
-              <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
+              <ButtonStyled
+                onPress={props.handleSubmit}
+                fontSize={18}
+                isLoading={isLoading}
+                isDisabled={isLoading}
+              >
                 Reset password
               </ButtonStyled>
             </VStack>

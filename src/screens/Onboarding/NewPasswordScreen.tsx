@@ -1,34 +1,15 @@
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from "@react-navigation/native-stack";
-import axios from "axios";
+import React from "react";
+
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Formik } from "formik";
 import { Center, VStack } from "native-base";
-import React from "react";
-import * as yup from "yup";
 
 import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
 import { ButtonStyled, ButtonSupport, InputStyled } from "../../components/UI";
+import { newPasswordSchema } from "../../helpers/yupSchemas";
+import { useNewPassword } from "../../hooks/useNewPassword";
 import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
-
-const newPasswordSchema = yup.object({
-  newPassword: yup
-    .string()
-    .required("No password provided")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-  confirmPassword: yup
-    .string()
-    .when("newPassword", (newPassword, field) =>
-      newPassword
-        ? field
-            .required("No password provided")
-            .oneOf([yup.ref("newPassword")], "Password does not match")
-        : field,
-    ),
-});
 
 type Props = NativeStackScreenProps<
   OnboardingStackParamList,
@@ -38,19 +19,8 @@ type Props = NativeStackScreenProps<
 export const NewPasswordScreen: React.FC<Props> = ({ navigation, route }) => {
   const { email } = route.params;
 
-  console.log(email, "email");
-  const handleNewPassword = async (values: any, actions: any) => {
-    try {
-      await axios.patch("http://localhost:3000/api/users/change-password", {
-        email,
-        newPassword: values.newPassword,
-      });
-      actions.resetForm();
-      navigation.replace("LoginScreen");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { isLoading, handleNewPassword } = useNewPassword(email);
+
   return (
     <VStack flex={1} backgroundColor="#fff">
       <AuthHeader
@@ -94,7 +64,12 @@ export const NewPasswordScreen: React.FC<Props> = ({ navigation, route }) => {
                 secureTextEntry={true}
               />
 
-              <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
+              <ButtonStyled
+                onPress={props.handleSubmit}
+                fontSize={18}
+                isLoading={isLoading}
+                isDisabled={isLoading}
+              >
                 Create new password
               </ButtonStyled>
             </VStack>

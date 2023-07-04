@@ -16,7 +16,8 @@ export const AuthHeader: React.FC<Props> = ({ title, subtitle }) => {
       />
       <Center marginTop={8} paddingX="16px">
         <Text
-          marginBottom={"8px"}
+          marginBottom="8px"
+          textAlign="center"
           fontSize={28}
           fontWeight={500}
           lineHeight={32}

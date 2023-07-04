@@ -47,7 +47,12 @@ module.exports = {
       },
     ],
     "prettier/prettier": ["error"],
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        groups: [["^react$"], ["^@?\\w"], ["^\\u0000"]],
+      },
+    ],
     "simple-import-sort/exports": "error",
     "import/no-duplicates": ["error", { "prefer-inline": true }],
   },

@@ -1,9 +1,8 @@
+import React from "react";
+
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import axios from "axios";
 import { Formik } from "formik";
 import { Center, Divider, HStack, ScrollView, Text, VStack } from "native-base";
-import React from "react";
-import * as yup from "yup";
 
 import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
@@ -13,36 +12,17 @@ import {
   ButtonSupport,
   InputStyled,
 } from "../../components/UI";
+import { registerSchema } from "../../helpers/yupSchemas";
+import { useRegister } from "../../hooks/useRegister";
 import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
-
-const registerSchema = yup.object({
-  name: yup.string().required().min(2),
-  email: yup.string().required().email(),
-  password: yup
-    .string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-});
 
 type Props = {
   navigation: NativeStackNavigationProp<OnboardingStackParamList>;
 };
 
 export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
-  const handleRegister = async (values: any, actions: any) => {
-    try {
-      await axios.post("http://localhost:3000/api/users/register", {
-        email: values.email,
-        name: values.name,
-        password: values.password,
-      });
-      actions.resetForm();
-      navigation.navigate("OTPScreen", { email: values.email });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { isLoading, handleRegister } = useRegister();
+
   return (
     <VStack flex={1} backgroundColor="#fff">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -93,7 +73,12 @@ export const RegisterScreen: React.FC<Props> = ({ navigation }) => {
                   autoCorrect={false}
                   secureTextEntry={true}
                 />
-                <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
+                <ButtonStyled
+                  onPress={props.handleSubmit}
+                  fontSize={18}
+                  isLoading={isLoading}
+                  isDisabled={isLoading}
+                >
                   Create your shop
                 </ButtonStyled>
               </VStack>

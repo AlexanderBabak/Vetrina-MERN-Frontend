@@ -1,10 +1,8 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
+
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import axios from "axios";
 import { Formik } from "formik";
 import { Center, Divider, HStack, ScrollView, Text, VStack } from "native-base";
-import React from "react";
-import * as yup from "yup";
 
 import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
@@ -14,44 +12,16 @@ import {
   ButtonSupport,
   InputStyled,
 } from "../../components/UI";
+import { loginSchema } from "../../helpers/yupSchemas";
+import { useLogin } from "../../hooks/useLogin";
 import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
-import { useAppDispatch } from "../../redux/reduxType";
-import { signIn } from "../../redux/slices/authSlice";
-
-const loginSchema = yup.object({
-  email: yup.string().required().email(),
-  password: yup
-    .string()
-    .required("No password provided.")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-});
 
 type Props = {
   navigation: NativeStackNavigationProp<OnboardingStackParamList>;
 };
 
 export const LoginScreen: React.FC<Props> = ({ navigation }) => {
-  const dispatch = useAppDispatch();
-
-  const handleLogin = async (values: any, actions: any) => {
-    try {
-      const loginResponse = await axios.post(
-        "http://localhost:3000/api/users/login",
-        {
-          email: values.email,
-          password: values.password,
-        },
-      );
-
-      const { token } = loginResponse.data;
-      await AsyncStorage.setItem("token", JSON.stringify(token));
-      dispatch(signIn({ token }));
-      actions.resetForm();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { isLoading, handleLogin } = useLogin();
 
   return (
     <VStack flex={1} backgroundColor="#fff">
@@ -93,7 +63,12 @@ export const LoginScreen: React.FC<Props> = ({ navigation }) => {
                   autoCorrect={false}
                   secureTextEntry={true}
                 />
-                <ButtonStyled onPress={props.handleSubmit} fontSize={18}>
+                <ButtonStyled
+                  onPress={props.handleSubmit}
+                  fontSize={18}
+                  isLoading={isLoading}
+                  isDisabled={isLoading}
+                >
                   Login
                 </ButtonStyled>
               </VStack>
