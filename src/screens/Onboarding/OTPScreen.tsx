@@ -9,7 +9,7 @@ import { AuthHeader } from "../../components/AuthHeader";
 import { AuthNavigation } from "../../components/AuthNavigation";
 import { ButtonStyled } from "../../components/UI";
 import { useOTP } from "../../hooks/useOTP";
-import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../../types/navigationInterfaces";
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, "OTPScreen">;
 

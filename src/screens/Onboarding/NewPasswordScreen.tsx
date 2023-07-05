@@ -9,7 +9,7 @@ import { AuthNavigation } from "../../components/AuthNavigation";
 import { ButtonStyled, ButtonSupport, InputStyled } from "../../components/UI";
 import { newPasswordSchema } from "../../helpers/yupSchemas";
 import { useNewPassword } from "../../hooks/useNewPassword";
-import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../../types/navigationInterfaces";
 
 type Props = NativeStackScreenProps<
   OnboardingStackParamList,

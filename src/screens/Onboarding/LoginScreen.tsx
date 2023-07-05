@@ -14,7 +14,7 @@ import {
 } from "../../components/UI";
 import { loginSchema } from "../../helpers/yupSchemas";
 import { useLogin } from "../../hooks/useLogin";
-import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../../types/navigationInterfaces";
 
 type Props = {
   navigation: NativeStackNavigationProp<OnboardingStackParamList>;
@@ -22,7 +22,6 @@ type Props = {
 
 export const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const { isLoading, handleLogin } = useLogin();
-
   return (
     <VStack flex={1} backgroundColor="#fff">
       <ScrollView showsVerticalScrollIndicator={false}>

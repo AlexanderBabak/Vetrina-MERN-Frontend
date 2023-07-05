@@ -5,9 +5,9 @@ import { FormikHelpers } from "formik";
 
 import { loginUser } from "../api/authServices";
 import { showNotification } from "../helpers/showNotification";
-import { AuthData } from "../interfaces/userInterfaces";
 import { useAppDispatch } from "../redux/reduxType";
 import { signIn } from "../redux/slices/authSlice";
+import { AuthData } from "../types/userInterfaces";
 
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);

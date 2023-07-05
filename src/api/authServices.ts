@@ -1,4 +1,4 @@
-import { AuthData } from "../interfaces/userInterfaces";
+import { AuthData } from "../types/userInterfaces";
 import { axiosInstance } from "./axiosInstance";
 
 export const loginUser = async (values: AuthData) => {

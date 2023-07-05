@@ -1,10 +1,11 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { AlertDialog, Button, Center } from "native-base";
 import React, { useEffect, useRef, useState } from "react";
 
-import { RootParamList } from "../interfaces/navigationInterfaces";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AlertDialog, Button, Center } from "native-base";
+
 import { useAppDispatch } from "../redux/reduxType";
 import { signOut } from "../redux/slices/authSlice";
+import { RootParamList } from "../types/navigationInterfaces";
 
 type Props = {
   navigation: NativeStackNavigationProp<RootParamList>;

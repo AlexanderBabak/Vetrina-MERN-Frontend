@@ -1,7 +1,6 @@
+import { BASE_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-
-const BASE_URL = "http://localhost:3000"; // TODO: create from env
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,

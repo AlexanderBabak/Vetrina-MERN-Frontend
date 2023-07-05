@@ -14,7 +14,7 @@ import {
 } from "../../components/UI";
 import { registerSchema } from "../../helpers/yupSchemas";
 import { useRegister } from "../../hooks/useRegister";
-import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../../types/navigationInterfaces";
 
 type Props = {
   navigation: NativeStackNavigationProp<OnboardingStackParamList>;

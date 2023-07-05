@@ -6,7 +6,7 @@ import { FormikHelpers } from "formik";
 
 import { setNewPassword } from "../api/authServices";
 import { showNotification } from "../helpers/showNotification";
-import { OnboardingStackParamList } from "../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../types/navigationInterfaces";
 
 type Props = NativeStackNavigationProp<OnboardingStackParamList>;
 

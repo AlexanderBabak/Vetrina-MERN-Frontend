@@ -1,10 +1,11 @@
+import React from "react";
+
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Center, Pressable, Text, View } from "native-base";
-import React from "react";
 
 import HeadphonesIcon from "../../assets/icons/HeadphonesIcon";
-import { OnboardingStackParamList } from "../../interfaces/navigationInterfaces";
+import { OnboardingStackParamList } from "../../types/navigationInterfaces";
 
 const ButtonSupport = () => {
   const navigation: NativeStackNavigationProp<OnboardingStackParamList> =

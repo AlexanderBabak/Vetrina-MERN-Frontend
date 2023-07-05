@@ -1,13 +1,10 @@
+import React, { useEffect } from "react";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "native-base";
-import React, { useEffect } from "react";
 
-import {
-  MainStackParamList,
-  OnboardingStackParamList,
-} from "../interfaces/navigationInterfaces";
 import { useAppDispatch, useAppSelector } from "../redux/reduxType";
 import { authSelector, signIn } from "../redux/slices/authSlice";
 import { MainScreen } from "../screens/MainScreen";
@@ -17,6 +14,10 @@ import { NewPasswordScreen } from "../screens/Onboarding/NewPasswordScreen";
 import { OTPScreen } from "../screens/Onboarding/OTPScreen";
 import { RegisterScreen } from "../screens/Onboarding/RegisterScreen";
 import { SupportScreen } from "../screens/Onboarding/SupportScreen";
+import {
+  MainStackParamList,
+  OnboardingStackParamList,
+} from "../types/navigationInterfaces";
 
 const OnboardingStack = createNativeStackNavigator<OnboardingStackParamList>();
 
