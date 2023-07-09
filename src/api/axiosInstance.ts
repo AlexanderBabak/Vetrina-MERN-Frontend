@@ -2,6 +2,7 @@ import { BASE_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
+// need to run local server of deploy a backend part
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });

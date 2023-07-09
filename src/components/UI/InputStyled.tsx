@@ -1,5 +1,6 @@
-import { FormControl, Input } from "native-base";
 import React, { ChangeEvent } from "react";
+
+import { FormControl, Input } from "native-base";
 import { KeyboardTypeOptions } from "react-native";
 
 type Props = {

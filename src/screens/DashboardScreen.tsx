@@ -1,5 +1,6 @@
-import { Center, Heading } from "native-base";
 import React from "react";
+
+import { Center, Heading } from "native-base";
 // import Icon from 'react-native-vector-icons/Ionicons';
 
 export const DashboardScreen = () => {

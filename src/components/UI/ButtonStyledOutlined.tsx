@@ -1,5 +1,6 @@
-import { Center, Pressable, Text, View } from "native-base";
 import React from "react";
+
+import { Center, Pressable, Text, View } from "native-base";
 
 import FacebookIcon from "../../assets/icons/FacebookIcon";
 import GoogleIcon from "../../assets/icons/GoogleIcon";

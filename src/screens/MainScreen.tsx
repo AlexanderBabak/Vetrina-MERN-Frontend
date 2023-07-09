@@ -1,34 +1,19 @@
 // import { createDrawerNavigator } from "@react-navigation/drawer";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Text, View } from "native-base";
 
-import { axiosInstance } from "../api/axiosInstance";
 // import Icon from "react-native-vector-icons/Ionicons";
-import { DashboardScreen } from "./DashboardScreen";
-import { LogoutScreen } from "./LogoutScreen";
-import { OrdersScreen } from "./OrdersScreen";
-import { PaymentScreen } from "./PaymentScreen";
-import { ProductsScreen } from "./ProductsScreen";
-import { SubscribtionScreen } from "./SubscribtionScreen";
+// import { DashboardScreen } from "./DashboardScreen";
+// import { LogoutScreen } from "./LogoutScreen";
+// import { OrdersScreen } from "./OrdersScreen";
+// import { PaymentScreen } from "./PaymentScreen";
+// import { ProductsScreen } from "./ProductsScreen";
+// import { SubscribtionScreen } from "./SubscribtionScreen";
 
 // const Drawer = createDrawerNavigator();
 
 export const MainScreen = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axiosInstance.get(
-          "api/users/649c080592d30752ee89c19a",
-        );
-        console.log(response.data, "user");
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, []);
   return (
     <View>
       <Text>Main</Text>

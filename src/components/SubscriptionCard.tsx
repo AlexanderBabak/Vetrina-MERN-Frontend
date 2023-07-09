@@ -1,6 +1,8 @@
-import React from 'react';
-import { HStack, Text, VStack } from 'native-base';
-import { ButtonStyled } from '../components/UI/ButtonStyled';
+import React from "react";
+
+import { HStack, Text, VStack } from "native-base";
+
+import { ButtonStyled } from "./UI";
 
 type Props = {
   isYearly: boolean;
@@ -58,7 +60,7 @@ export const SubscriptionCard: React.FC<Props> = ({
           lineHeight={22}
           color="neutral.black.default"
         >
-          €{' '}
+          €{" "}
           <Text
             fontFamily="body"
             fontSize={28}
@@ -68,7 +70,7 @@ export const SubscriptionCard: React.FC<Props> = ({
           >
             {isYearly ? yearlyPrice : monthlyPrice}
           </Text>
-          {isYearly ? '/year' : '/month'}
+          {isYearly ? "/year" : "/month"}
         </Text>
       </VStack>
       <VStack>
@@ -82,7 +84,10 @@ export const SubscriptionCard: React.FC<Props> = ({
         >
           Max 150 prodotti
         </Text>
-        <ButtonStyled onPress={() => {}} fontSize={16}>
+        <ButtonStyled
+          onPress={() => console.log("Change plan pressed")}
+          fontSize={16}
+        >
           Change plan
         </ButtonStyled>
       </VStack>

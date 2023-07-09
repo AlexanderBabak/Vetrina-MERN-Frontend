@@ -1,5 +1,6 @@
-import { Center, Link, Text } from "native-base";
 import React from "react";
+
+import { Center, Link, Text } from "native-base";
 
 type Props = {
   text: string;

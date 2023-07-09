@@ -1,42 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
 import {
   Center,
   HStack,
-  Text,
-  Switch,
-  VStack,
   ScrollView,
+  Switch,
+  Text,
   View,
-} from 'native-base';
-import { SubscriptionCard } from '../components/SubscriptionCard';
+  VStack,
+} from "native-base";
+
+import { SubscriptionCard } from "../components/SubscriptionCard";
 
 const plans = [
   {
-    id: '011',
-    title: 'Free',
-    yearlyPrice: '0.00',
-    monthlyPrice: '0.00',
+    id: "011",
+    title: "Free",
+    yearlyPrice: "0.00",
+    monthlyPrice: "0.00",
     description: false,
   },
   {
-    id: '022',
-    title: 'Vetrina',
-    yearlyPrice: '109.00',
-    monthlyPrice: '10.00',
+    id: "022",
+    title: "Vetrina",
+    yearlyPrice: "109.00",
+    monthlyPrice: "10.00",
     description: true,
   },
   {
-    id: '033',
-    title: 'Negozio',
-    yearlyPrice: '209.00',
-    monthlyPrice: '20.00',
+    id: "033",
+    title: "Negozio",
+    yearlyPrice: "209.00",
+    monthlyPrice: "20.00",
     description: true,
   },
   {
-    id: '044',
-    title: 'Vetrina',
-    yearlyPrice: '399.00',
-    monthlyPrice: '30.00',
+    id: "044",
+    title: "Vetrina",
+    yearlyPrice: "399.00",
+    monthlyPrice: "30.00",
     description: true,
   },
 ];
@@ -65,14 +67,14 @@ export const SubscribtionScreen = () => {
               fontSize={17}
               fontWeight={600}
               lineHeight={22}
-              color={!isYearly ? 'neutral.black.default' : '#7D8A99'}
+              color={!isYearly ? "neutral.black.default" : "#7D8A99"}
             >
               Monthly
             </Text>
             <Switch
               offTrackColor="primary.blue.main"
               onTrackColor="primary.blue.main"
-              size={'lg'}
+              size={"lg"}
               isChecked={isYearly}
               onToggle={() => {
                 setIsYearly(prev => !prev);
@@ -85,7 +87,7 @@ export const SubscribtionScreen = () => {
               fontSize={17}
               fontWeight={600}
               lineHeight={22}
-              color={isYearly ? 'neutral.black.default' : '#7D8A99'}
+              color={isYearly ? "neutral.black.default" : "#7D8A99"}
             >
               Yearly
             </Text>

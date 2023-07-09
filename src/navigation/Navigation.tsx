@@ -70,7 +70,7 @@ export const Navigation = () => {
       const storedToken = await AsyncStorage.getItem("token");
 
       if (storedToken) {
-        // dispatch(signIn({ token: storedToken }));
+        dispatch(signIn({ token: storedToken }));
       }
     };
 

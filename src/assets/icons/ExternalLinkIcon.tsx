@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+
 import Svg, { Path, SvgProps } from "react-native-svg";
 
 const ExternalLinkIcon = (props: SvgProps) => (
